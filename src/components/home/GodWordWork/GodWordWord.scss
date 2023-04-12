@@ -1,0 +1,111 @@
+.gww {
+    .gww-container {
+        display: flex;
+        gap: 60px;
+    
+        .gww-blogger-featured {
+            flex: 2;
+    
+            img {
+                width: 100%;
+                border-radius: 12px;
+            }
+            h4 {
+                margin-top: 25px;
+                a {
+                    color:var(--black-color);
+                    font-weight: 700;
+                    font-size: 26px;
+                }
+    
+                &:hover {
+                    a{
+                        color: var(--primary-hover-color);
+                    }
+                }
+            }
+    
+    
+            p {
+                margin-top: 9px;
+                font-size: 18px;
+                color: var(--text-color);
+                line-height: 1.6;
+            }
+        }
+        .gww-list {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+    
+            .gww-item {
+                display: flex;
+                gap: 32px;
+    
+                .gww-item-link {
+                    img {
+                        width: 202px;
+                        border-radius: 12px; 
+                    }
+                    
+                    &:hover {
+                        color: var(--primary-hover-color);
+                    }
+                }
+    
+                .gww-item-content {
+                    flex: 1;
+                    h4 {
+                        a {
+                            display: block;
+                            width: 100%;
+                            font-size: 21px;
+                            line-height: 24px;
+                            color: var(--black-color);
+                            font-weight: 700;
+                        }
+                        margin-bottom: 8px;
+                    }
+    
+                    p {
+                        font-size: 18px;
+                        color: var(--text-color);
+                        line-height: 1.6;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;  /* số dòng hiển thị */
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .gww {
+        .gww-container {
+            flex-direction: column;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .gww {
+        .gww-container {
+            flex-direction: column;
+            .gww-list {
+                .gww-item {
+                    flex-direction: column;
+                    .gww-item-link {
+                        img {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

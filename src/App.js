@@ -1,24 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState, lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CategoryPage from "./components/Pages/CategoryPage";
+import Single from "./components/Pages/Single";
+import { getCategories } from "./api";
+import { removeVietnameseAccents } from "./utils";
+import Loading from "./components/Loading";
+
+const Header = lazy(() => import("./components/Header"));
+const Home = lazy(() => import("./components/home"));
+const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getAllCategory = async () => {
+      const respone = await getCategories();
+      const data = await respone.data;
+      setCategories(data);
+    };
+    getAllCategory();
+  }, [categories]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<Loading />}>
+      <div className="app">
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            {/* Category */}
+            {categories.map((categoryItem, index) => {
+              let catePath = removeVietnameseAccents(categoryItem.category);
+              return (
+                <Route
+                  path={`/${catePath}`}
+                  element={<CategoryPage category={categoryItem.category} />}
+                  key={index}
+                />
+              );
+            })}
+
+            {/* Single */}
+            {categories.map((categoryItem, index) => {
+              let catePath = removeVietnameseAccents(categoryItem.category);
+              return (
+                <Route
+                  path={`/${catePath}/:title`}
+                  element={<Single />}
+                  key={index}
+                />
+              );
+            })}
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </Suspense>
   );
 }
 
