@@ -19,6 +19,7 @@ function Home() {
     witNess: "",
     notifyAndNews: "",
   });
+  window.document.title = 'Trang chủ';
   useEffect(() => {
     const getAllCategory = async () => {
       const respone = await getCategories();

@@ -114,7 +114,7 @@ const CategoryPage = React.memo(({ category }) => {
                 <ul className="new-post-list">
                   {postAsDirected.map((postAsDirectedItem, index) => (
                     <li className="new-post-item" key={index}>
-                      <Link to={`/${removeVietnameseAccents(postAsDirectedItem.category)}/${postAsDirectedItem.title}`} className="new-post-img">
+                      <Link to={`/${removeVietnameseAccents(postAsDirectedItem.category)}/${encodeURIComponent(postAsDirectedItem.title)}`} className="new-post-img">
                         {isLoadingImg && <Loading position="relative" bg="unset" />}
                         <img
                           src={`${uriImage}${postAsDirectedItem.image}`}
@@ -129,7 +129,7 @@ const CategoryPage = React.memo(({ category }) => {
                             {(postAsDirectedItem.category)}
                           </Link>
                         </div>
-                        <h4><Link to={`/${removeVietnameseAccents(postAsDirectedItem.category)}/${postAsDirectedItem.title}`}>
+                        <h4><Link to={`/${removeVietnameseAccents(postAsDirectedItem.category)}/${encodeURIComponent(postAsDirectedItem.title)}`}>
                           {postAsDirectedItem.title}</Link>
                         </h4>
                         <p><time>{dateConvert(postAsDirectedItem.createdAt)}</time></p>
