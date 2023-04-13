@@ -1,5 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { getPostAsCategoryDirected, getPostAsDirected, getPostDetail } from "../../../api";
+import {
+  getPostAsCategoryDirected,
+  getPostAsDirected,
+  getPostDetail,
+} from "../../../api";
 import "./Singgle.scss";
 import { useEffect, useState } from "react";
 import { uriImage } from "../../../constants";
@@ -22,7 +26,11 @@ function Single() {
       setPostDetail(data);
       setLoading(false);
 
-      const relatedRespone = await getPostAsCategoryDirected(data.category, 0, 4);
+      const relatedRespone = await getPostAsCategoryDirected(
+        data.category,
+        0,
+        4
+      );
       const relatedData = await relatedRespone.data;
       setRelatedPost(relatedData);
       setLoading(false);
@@ -33,54 +41,56 @@ function Single() {
       setLoading(false);
     };
     getPostDetailAsync();
-  },[title])
+  }, [title]);
 
   function shareToFacebook() {
     // Construct the URL to share
     const shareUrl = encodeURIComponent(window.location.href);
-  
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
+
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
     // Open the share dialog in a new window
-    window.open(facebookUrl, '_blank');
+    window.open(facebookUrl, "_blank");
   }
 
   function shareOnTwitter() {
     const pageUrl = window.location.href;
-    const tweetContent = encodeURIComponent('Check out this page!');
-  
+    const tweetContent = encodeURIComponent("Check out this page!");
+
     const twitterUrl = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${tweetContent}`;
-  
-    window.open(twitterUrl, '_blank');
+
+    window.open(twitterUrl, "_blank");
   }
 
   function shareOnGoogle() {
     const pageUrl = encodeURIComponent(window.location.href);
-  
+
     const googleUrl = `https://plus.google.com/share?url=${pageUrl}`;
-  
-    window.open(googleUrl, '_blank');
+
+    window.open(googleUrl, "_blank");
   }
-  
+
   function shareOnPinterest(image) {
     const pageUrl = encodeURIComponent(window.location.href);
     const imageUrl = encodeURIComponent(image);
-    const description = encodeURIComponent('Check out this page!');
-  
+    const description = encodeURIComponent("Check out this page!");
+
     const pinterestUrl = `https://www.pinterest.com/pin/create/button/?url=${pageUrl}&media=${imageUrl}&description=${description}`;
-  
-    window.open(pinterestUrl, '_blank');
+
+    window.open(pinterestUrl, "_blank");
   }
 
   function shareOnLinkedIn() {
     const pageUrl = encodeURIComponent(window.location.href);
     const pageTitle = encodeURIComponent(document.title);
-  
+
     const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}&title=${pageTitle}`;
-  
-    window.open(linkedInUrl, '_blank');
+
+    window.open(linkedInUrl, "_blank");
   }
 
-  const catePath = postDetail.category ? removeVietnameseAccents(postDetail.category) : ''
+  const catePath = postDetail.category
+    ? removeVietnameseAccents(postDetail.category)
+    : "";
   return (
     <>
       {loading && <Loading />}
@@ -95,12 +105,13 @@ function Single() {
           <div className="single-content">
             <img src={`${uriImage}${postDetail.image}`} alt="" />
             <p className="single-desc">{postDetail.description}</p>
-            <div dangerouslySetInnerHTML={{ __html: postDetail.content}}></div>
+            <div dangerouslySetInnerHTML={{ __html: postDetail.content }}></div>
           </div>
           <div className="post-meta">
             <div className="entry-meta">
               <span className="category-link">
-                Chuyên mục: <Link to={`/${catePath}`}>{postDetail.category}:&nbsp;</Link>
+                Chuyên mục:{" "}
+                <Link to={`/${catePath}`}>{postDetail.category}:&nbsp;</Link>
               </span>
               <Link to="#">
                 <time>{dateConvert(postDetail.createdAt)}</time>
@@ -116,19 +127,41 @@ function Single() {
           <div className="single-share-box">
             <div className="share-link-description">Chia sẻ</div>
             <div className="share-buttons">
-              <button className="facebook" title="Facebook" onClick={shareToFacebook}>
+              <button
+                className="facebook"
+                title="Facebook"
+                onClick={shareToFacebook}
+              >
                 <i className="fa-brands fa-facebook-f"></i>
               </button>
-              <button className="twitter" title="Twitter" onClick={shareOnTwitter}>
+              <button
+                className="twitter"
+                title="Twitter"
+                onClick={shareOnTwitter}
+              >
                 <i className="fa-brands fa-twitter"></i>
               </button>
-              <button className="google" title="Google+" onClick={shareOnGoogle}>
+              <button
+                className="google"
+                title="Google+"
+                onClick={shareOnGoogle}
+              >
                 <i className="fa-brands fa-google-plus-g"></i>
               </button>
-              <button className="pinterest" title="Pinterest" onClick={() => shareOnPinterest(`${uriImage}${postDetail.image}`)}>
+              <button
+                className="pinterest"
+                title="Pinterest"
+                onClick={() =>
+                  shareOnPinterest(`${uriImage}${postDetail.image}`)
+                }
+              >
                 <i className="fa-brands fa-pinterest"></i>
               </button>
-              <button className="linkedin" title="LinkedIn" onClick={shareOnLinkedIn}>
+              <button
+                className="linkedin"
+                title="LinkedIn"
+                onClick={shareOnLinkedIn}
+              >
                 <i className="fa-brands fa-linkedin-in"></i>
               </button>
             </div>
@@ -137,30 +170,44 @@ function Single() {
           <div className="single-related-posts">
             <h3>Bài viết liên quan</h3>
             <div className="single-related-list">
-              {relatedPost.length > 0 ? relatedPost.map((relatedPostItem, index) => (
-                <div className="related-item" key={index}>
-                  <div className="mini-post-img">
-                    <Link to={`/${removeVietnameseAccents(relatedPostItem.category)}/${relatedPostItem.title}`} className="alignleft post-rollover this-ready">
-                      <img
-                        className="lazy-load preload-me is-loaded lazy-hidden"
-                        src={`${uriImage}${relatedPostItem.image}`}
-                        alt={relatedPostItem.title}
-                      />
-                    </Link>
+              {relatedPost.length > 0 ? (
+                relatedPost.map((relatedPostItem, index) => (
+                  <div className="related-item" key={index}>
+                    <div className="mini-post-img">
+                      <Link
+                        to={`/${removeVietnameseAccents(
+                          relatedPostItem.category
+                        )}/${encodeURIComponent(relatedPostItem.title)}`}
+                        className="alignleft post-rollover this-ready"
+                      >
+                        <img
+                          className="lazy-load preload-me is-loaded lazy-hidden"
+                          src={`${uriImage}${relatedPostItem.image}`}
+                          alt={relatedPostItem.title}
+                        />
+                      </Link>
+                    </div>
+                    <div className="post-content">
+                      <Link
+                        to={`/${removeVietnameseAccents(
+                          relatedPostItem.category
+                        )}/${encodeURIComponent(relatedPostItem.title)}`}
+                      >
+                        {relatedPostItem.title}
+                      </Link>{" "}
+                      <br />
+                      <time
+                        className="text-secondary"
+                        dateTime={relatedPostItem.createdAt}
+                      >
+                        {dateConvert(relatedPostItem.createdAt)}
+                      </time>
+                    </div>
                   </div>
-                  <div className="post-content">
-                    <Link to={`/${removeVietnameseAccents(relatedPostItem.category)}/${relatedPostItem.title}`}>
-                      {relatedPostItem.title}
-                    </Link> <br />
-                    <time
-                      className="text-secondary"
-                      dateTime={relatedPostItem.createdAt}
-                    >
-                      {dateConvert(relatedPostItem.createdAt)}
-                    </time>
-                  </div>
-                </div>
-              )) : <Loading position="relative" bg="unset" zIndex='unset' />}
+                ))
+              ) : (
+                <Loading position="relative" bg="unset" zIndex="unset" />
+              )}
             </div>
           </div>
         </article>
@@ -181,22 +228,35 @@ function Single() {
           </div>
           <div className="presscore-blog-posts">
             <ul className="presscore-blog-posts-list">
-              {assidePost.length > 0 ? assidePost.map((assidePostItem, index) => (
-                <li className="presscore-blog-posts-item" key={index}>
-                  <Link to={`/${removeVietnameseAccents(assidePostItem.category)}/${assidePostItem.title}`}>
-                    <img
-                      src={`${uriImage}${assidePostItem.image}`}
-                      alt={assidePostItem.title}
-                    />
-                  </Link>
-                  <div className="post-content">
-                    <Link to={`/${removeVietnameseAccents(assidePostItem.category)}/${assidePostItem.title}`} className="two-dot">
-                      {assidePostItem.title}
+              {assidePost.length > 0 ? (
+                assidePost.map((assidePostItem, index) => (
+                  <li className="presscore-blog-posts-item" key={index}>
+                    <Link
+                      to={`/${removeVietnameseAccents(
+                        assidePostItem.category
+                      )}/${encodeURIComponent(assidePostItem.title)}`}
+                    >
+                      <img
+                        src={`${uriImage}${assidePostItem.image}`}
+                        alt={assidePostItem.title}
+                      />
                     </Link>
-                    <time>{dateConvert(assidePostItem.createdAt)}</time>
-                  </div>
-                </li>
-              )) : <Loading position="relative" bg="unset" zIndex='unset' />}
+                    <div className="post-content">
+                      <Link
+                        to={`/${removeVietnameseAccents(
+                          assidePostItem.category
+                        )}/${encodeURIComponent(assidePostItem.title)}`}
+                        className="two-dot"
+                      >
+                        {assidePostItem.title}
+                      </Link>
+                      <time>{dateConvert(assidePostItem.createdAt)}</time>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <Loading position="relative" bg="unset" zIndex="unset" />
+              )}
             </ul>
           </div>
         </aside>

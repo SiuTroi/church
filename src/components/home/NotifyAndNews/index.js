@@ -39,7 +39,7 @@ function NotifyAndNews({ category }) {
       <div className="noticeAndnew-list">
         {notifyAndNewsListArray.map((notifyAndNewsItem, index) => (
           <div className="noticeAndnew-item" key={index}>
-            <Link to={`/${catePath}/${notifyAndNewsItem.title}`}>
+            <Link to={`/${catePath}/${encodeURIComponent(notifyAndNewsItem.title)}`}>
               {isLoading && <Loading position="relative" bg="unset" />}
               <img
                 src={`${uriImage}${notifyAndNewsItem.image}`}
@@ -51,7 +51,7 @@ function NotifyAndNews({ category }) {
             <div>
               <Link to={`/${catePath}`}>{notifyAndNewsItem.category}</Link>
               <h4>
-                <Link to={`/${catePath}/${notifyAndNewsItem.title}`}>
+                <Link to={`/${catePath}/${encodeURIComponent(notifyAndNewsItem.title)}`}>
                   Cảm tạ Chúa – Dâng lời ước nguyện!
                 </Link>
               </h4>

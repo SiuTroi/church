@@ -64,48 +64,51 @@ const CategoryPage = React.memo(({ category }) => {
           {isLoading && <Loading />}
           <section className="cate-page">
             <div className="container cate-page-wrap">
-              <div className="cate-page-content">
-                {allPostByCate.map((postItem, index) => (
-                  <div className="content-item" key={index}>
-                    <Link to={`/${catePath}/${postItem.title}`} className="cate-link-img">
-                      {isLoadingImg && <Loading position="relative" bg="unset" />}
-                      <img 
-                        src={`${uriImage}${postItem.image}`}
-                        onLoad={handleImageLoad}
-                        alt="" 
-                        style={{ display: isLoadingImg ? 'none' : 'block' }}
-                        />
-                    </Link>
-                    <div className="content-desc">
-                      <div className="tags">
-                        <Link to={`/${catePath}`} className="tag-item">{postItem.category}</Link>
+              <div className='cate-page-content'>
+                <div className="cate-page-content-list">
+                  {allPostByCate.map((postItem, index) => (
+                    <div className="content-item" key={index}>
+                      <Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`} className="cate-link-img">
+                        {isLoadingImg && <Loading position="relative" bg="unset" />}
+                        <img 
+                          src={`${uriImage}${postItem.image}`}
+                          onLoad={handleImageLoad}
+                          alt="" 
+                          style={{ display: isLoadingImg ? 'none' : 'block' }}
+                          />
+                      </Link>
+                      <div className="content-desc">
+                        <div className="tags">
+                          <Link to={`/${catePath}`} className="tag-item">{postItem.category}</Link>
+                        </div>
+                        <h1><Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`}>{postItem.title}</Link></h1>
+                        <p className='three-dot'>
+                          {postItem.description.trim().length > 0 
+                            ? postItem.description 
+                            : <div dangerouslySetInnerHTML={{ __html: postItem.content}} 
+                                style={{
+                                  height: '77px',
+                                  overflow: 'hidden'
+                                }}>
+                              </div>}
+                        </p>
+                        <p><time>{dateConvert(postItem.createdAt)}</time></p>
+                        <Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`} className='readmore-btn'>Read more</Link>
                       </div>
-                      <h1><Link to={`/${catePath}/${postItem.title}`}>{postItem.title}</Link></h1>
-                      <p className='three-dot'>
-                        {postItem.description.trim().length > 0 
-                          ? postItem.description 
-                          : <div dangerouslySetInnerHTML={{ __html: postItem.content}} 
-                              style={{
-                                height: '77px',
-                                overflow: 'hidden'
-                              }}>
-                            </div>}
-                      </p>
-                      <p><time>{dateConvert(postItem.createdAt)}</time></p>
-                      <Link to={`/${catePath}/${postItem.title}`} className='readmore-btn'>Read more</Link>
                     </div>
-                  </div>
-                ))}
-              <div className='pagination'>
-                {pagination.map((item, index) => (
-                  <button
-                   key={index}
-                   onClick={() => handleClickCurrentPagination((item * limit) - limit, index)} 
-                   style={{backgroundColor: index === curretPagination && '#121418', color: index === curretPagination && 'white'}}
-                   className='btn'>{item}</button>
-                ))}
+                  ))}
+                </div>
+                <div className='pagination'>
+                  {pagination.map((item, index) => (
+                    <button
+                    key={index}
+                    onClick={() => handleClickCurrentPagination((item * limit) - limit, index)} 
+                    style={{backgroundColor: index === curretPagination && '#121418', color: index === curretPagination && 'white'}}
+                    className='btn'>{item}</button>
+                  ))}
+                </div>
               </div>
-              </div>
+
               <aside className="aside">
                 <h3>bài viết mới nhất</h3>
                 <ul className="new-post-list">

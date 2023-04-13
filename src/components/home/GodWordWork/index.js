@@ -40,7 +40,7 @@ function GodWordWord({ category }) {
       </div>
       <div className="gww-container">
         <div className="gww-blogger-featured">
-          <Link to={`${catePath}/${gwwBloggerFeatured.title}`}>
+          <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured.title)}`}>
             {isLoading && <Loading position="relative" bg="unset" />}
             <img
               src={`${uriImage}${gwwBloggerFeatured.image}`}
@@ -50,7 +50,7 @@ function GodWordWord({ category }) {
             />
           </Link>
           <h4>
-            <Link to={`${catePath}/${gwwBloggerFeatured.title}`}>
+            <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured.title)}`}>
               {gwwBloggerFeatured.title}
             </Link>
           </h4>
@@ -60,7 +60,7 @@ function GodWordWord({ category }) {
           {gwwListArray.map((gwwItem, index) => (
             <div className="gww-item" key={index}>
               <Link
-                to={`${catePath}/${gwwItem.title}`}
+                to={`${catePath}/${encodeURIComponent(gwwItem.title)}`}
                 className="gww-item-link"
               >
                 {isLoading && <Loading position="relative" bg="unset" />}
@@ -73,7 +73,7 @@ function GodWordWord({ category }) {
               <div className="gww-item-content">
                 <h4>
                   <Link
-                    to={`${catePath}/${gwwItem.title}`}
+                    to={`${catePath}/${encodeURIComponent(gwwItem.title)}`}
                     className="gww-item-link"
                   >
                     {gwwItem.title}

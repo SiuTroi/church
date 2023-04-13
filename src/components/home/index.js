@@ -14,6 +14,7 @@ const Banner = lazy(() => import('./Banner'));
 
 function Home() {
   const [categories, setCategories] = useState({
+    all: [],
     godWordWork: "",
     witNess: "",
     notifyAndNews: "",
@@ -22,30 +23,33 @@ function Home() {
     const getAllCategory = async () => {
       const respone = await getCategories();
       const data = await respone.data;
-
+      setCategories(prevState => ({
+        ...prevState,
+        all: data
+      }))
       data.map((dataItem) => {
-            switch (removeVietnameseAccents(dataItem.category)) {
-                case "loi-chua-noi-lam-viec":
-                    setCategories(prevState => ({
-                        ...prevState,
-                        godWordWork: dataItem.category
-                      }))
-                    break;
-                case "nguoi-lam-chung":
-                    setCategories(prevState => ({
-                        ...prevState,
-                        witNess: dataItem.category
-                      }))
-                    break;
-                case "ban-tin":
-                    setCategories(prevState => ({
-                        ...prevState,
-                        notifyAndNews: dataItem.category
-                      }))
-                    break;
-                default:
-                    break;
-            }
+        switch (removeVietnameseAccents(dataItem.category)) {
+          case "loi-chua-noi-lam-viec":
+              setCategories(prevState => ({
+                  ...prevState,
+                  godWordWork: dataItem.category
+                }))
+              break;
+          case "nguoi-lam-chung":
+              setCategories(prevState => ({
+                  ...prevState,
+                  witNess: dataItem.category
+                }))
+              break;
+          case "ban-tin":
+              setCategories(prevState => ({
+                  ...prevState,
+                  notifyAndNews: dataItem.category
+                }))
+              break;
+          default:
+              break;
+        }
       })
     };
     getAllCategory();
@@ -61,7 +65,7 @@ function Home() {
       <GodWordWork category={categories.godWordWork} />
       <Witness category={categories.witNess} />
       <NewVideo />
-      <Sac />
+      <Sac categories={categories.all} />
       <NotifyAndNews category={categories.notifyAndNews} />
     </Suspense>
     </> : <></>}

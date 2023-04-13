@@ -1,7 +1,8 @@
 import "./Header.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { removeVietnameseAccents } from "../../utils";
+import { getCategories } from "../../api"
 import logo from "../../images/logo.svg"
 
 const cateListArray = [
@@ -83,6 +84,25 @@ const secondNavArray = [
 function Header() {
   const [showSearchWraper, setShowSearchWraper] = useState(false);
   const [showCateMobile, setShowCateMobile] = useState(false);
+  const [showMoreCate, setShowMoreCate] = useState(false);
+  const [cateListArray, setCateListArray] = useState({
+    show: [],
+    hide: []
+  });
+  
+
+  useEffect(() => {
+    const getCategoriesAsync = async () => {
+      const respone = await getCategories();
+      const data = await respone.data;
+      setCateListArray(prevState => ({
+        ...prevState,
+        show: data.slice(0, 5),
+        hide: data.slice(5, data.length)
+      }));
+    };  
+    getCategoriesAsync();
+  }, [])
 
   const toggleSubCateList = (index) => {
     var subCate = document.querySelectorAll('.sub-cate')[index];
@@ -103,6 +123,8 @@ function Header() {
     setShowCateMobile(!showCateMobile);
     window.scrollTo(0, 0);
   }
+
+  const showCateListArray = window.innerWidth > 1023 ? cateListArray.show : cateListArray.show.concat(cateListArray.hide);
   return (
     <header className="header">
       <nav className="header-nav container">
@@ -118,19 +140,19 @@ function Header() {
           style={{ display: showCateMobile && "flex" }}
         >
           <ul className="list-cate">
-            {cateListArray.map((cateItem, index) => (
+            {showCateListArray.map((cateItem, index) => (
               <li className="item-cate" key={index}>
-                <Link to={removeVietnameseAccents(cateItem.name)} onClick={hideCateMobileAndScrollToTop}>{cateItem.name}</Link>
-                {cateItem.subCate.length > 0 && (
+                <Link to={removeVietnameseAccents(cateItem.category)} onClick={hideCateMobileAndScrollToTop}>{cateItem.category}</Link>
+                {/* {cateItem.subCate.length > 0 && (
                   <span
                     className="icon-showdown"
                     onClick={() => toggleSubCateList(index)}
                   >
                     <i className="fa-solid fa-chevron-down"></i>
                   </span>
-                )}
+                )} */}
                 {/* Sub category */}
-                {cateItem.subCate.length > 0 ? (
+                {/* {cateItem.subCate.length > 0 ? (
                   <ul className="sub-cate">
                     {cateItem.subCate.map((subCateItem, subCateindex) => (
                       <li key={subCateindex}>
@@ -146,13 +168,13 @@ function Header() {
                   </ul>
                 ) : (
                   <></>
-                )}
+                )} */}
                 
               </li>
             ))}
           </ul>
 
-          <ul className="secondary-nav">
+          {/* <ul className="secondary-nav">
             {secondNavArray.map((secondNavItem, index) => (
               <li className="secondary-nav-item" key={index}>
                 <Link
@@ -172,7 +194,38 @@ function Header() {
                 <i className="fa-solid fa-magnifying-glass"></i>
               )}
             </button>
-          </ul>
+          </ul> */}
+        </div>
+        <div className="header-action">
+          {cateListArray.hide.length > 0 && 
+            <button onClick={() => setShowMoreCate(!showMoreCate)} className="btn btn-ellipsis">
+              <i className="fa-solid fa-ellipsis-vertical"></i>
+
+              {showMoreCate && <ul className="sub-cate">
+                {cateListArray.hide.map((subCateItem, subCateindex) => (
+                  <li key={subCateindex}>
+                    <Link
+                      to={removeVietnameseAccents(subCateItem.category)}
+                      className="sub-cate-link"
+                      onClick={hideCateMobileAndScrollToTop}
+                    >
+                      {subCateItem.category}
+                    </Link>
+                  </li>
+                ))}
+              </ul>}
+            </button>
+          }
+          <button
+            className="btn-search"
+            onClick={() => setShowSearchWraper(!showSearchWraper)}
+          >
+            {showSearchWraper ? (
+              <i className="fa-solid fa-xmark"></i>
+            ) : (
+              <i className="fa-solid fa-magnifying-glass"></i>
+            )}
+          </button>
         </div>
         <div className="mobile-menu">
           <button

@@ -38,24 +38,24 @@ function Witness({ category }) {
       </div>
       <div className="witness-list">
         {witnessListArray.map((witnessItem, index) => (
-            <div className="witness-item" key={index}>
-                <Link to={`/${catePath}/${witnessItem.title}`} className="witness-item-link">
-                  {isLoading && <Loading position="relative" bg="unset" />}
-                    <img src={`${uriImage}${witnessItem.image}`}
-                    onLoad={handleImageLoad} alt={witnessItem.title} 
-                    style={{ display: isLoading ? 'none' : 'block' }}
-                    />
+          <div className="witness-item" key={index}>
+            <Link to={`/${catePath}/${encodeURIComponent(witnessItem.title)}`} className="witness-item-link">
+              {isLoading && <Loading position="relative" bg="unset" />}
+                <img src={`${uriImage}${witnessItem.image}`}
+                onLoad={handleImageLoad} alt={witnessItem.title} 
+                style={{ display: isLoading ? 'none' : 'block' }}
+                />
+            </Link>
+            <div>
+                <h4>
+                <Link to={`/${catePath}/${encodeURIComponent(witnessItem.title)}`} className="witness-item-link">
+                    {witnessItem.title}
                 </Link>
-                <div>
-                    <h4>
-                    <Link to={`/${catePath}/${witnessItem.title}`} className="witness-item-link">
-                        {witnessItem.title}
-                    </Link>
-                    </h4>
-                    <p className="three-dot" dangerouslySetInnerHTML={{__html: witnessItem.content }}></p>
-                    <span>{dateConvert(witnessItem.createdAt)}</span>
-                </div>
+                </h4>
+                <p className="three-dot" dangerouslySetInnerHTML={{__html: witnessItem.content }}></p>
+                <span>{dateConvert(witnessItem.createdAt)}</span>
             </div>
+          </div>
         ))}
       </div>
     </section>

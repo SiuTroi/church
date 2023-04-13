@@ -6,76 +6,78 @@
         .cate-page-content {
             width: 65%;
             padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-
-            .content-item {
-                padding: 12px;
-                margin-bottom: 42px;
-                width: 50%;
-
-                .tags {
-                    margin: 6px 0;
-                    .tag-item {
-                        display: inline-block;
-                        color: #fcfcfc;
-                        text-transform: uppercase;
-                        font-size: 12px;
-                        font-weight: 600;
-                        background-color: #355162;
-                        padding: 2px 8px;
-                        margin-bottom: 2px;
-                        border-radius: 10px;
-
-                        &:hover {
-                            background-color: var(--primary-hover-color);
+            .cate-page-content-list {
+                display: flex;
+                flex-wrap: wrap;
+                .content-item {
+                    padding: 12px;
+                    margin-bottom: 42px;
+                    width: 50%;
+    
+                    .tags {
+                        margin: 6px 0;
+                        .tag-item {
+                            display: inline-block;
+                            color: #fcfcfc;
+                            text-transform: uppercase;
+                            font-size: 12px;
+                            font-weight: 600;
+                            background-color: #355162;
+                            padding: 2px 8px;
+                            margin-bottom: 2px;
+                            border-radius: 10px;
+    
+                            &:hover {
+                                background-color: var(--primary-hover-color);
+                            }
                         }
                     }
-                }
-                .cate-link-img {
-                    img {
-                        max-width: 100%;
-                        border-radius: 12px;
-                        height: 200px;
-                        object-fit: cover;
-
-                    }
-                }
-
-                .content-desc {
-                    p {
-                        font-size: 15px;
-                        color: #6c6f72;
-                        margin: 8px 0;
-                        line-height: 1.3;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;  /* số dòng hiển thị */
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-
-                        time {
-                            font-size: 13px;
+                    .cate-link-img {
+                        img {
+                            max-width: 100%;
+                            border-radius: 12px;
+                            height: 200px;
+                            object-fit: cover;
+    
                         }
                     }
-
-                    .readmore-btn {
-                        display: inline-block;
-                        background-color: var(--primary-color);
-                        text-transform: uppercase;
-                        border-radius: 20px;
-                        padding: 12px 20px;
-                        color: var(--white-color);
-                        border: none;
-                        cursor: pointer;
-                        font-weight: 500;
-
-                        &:hover {
-                            background-color: var(--primary-hover-color);
+    
+                    .content-desc {
+                        p {
+                            font-size: 15px;
+                            color: #6c6f72;
+                            margin: 8px 0;
+                            line-height: 1.3;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;  /* số dòng hiển thị */
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+    
+                            time {
+                                font-size: 13px;
+                            }
+                        }
+    
+                        .readmore-btn {
+                            display: inline-block;
+                            background-color: var(--primary-color);
+                            text-transform: uppercase;
+                            border-radius: 20px;
+                            padding: 12px 20px;
+                            color: var(--white-color);
+                            border: none;
+                            cursor: pointer;
+                            font-weight: 500;
+    
+                            &:hover {
+                                background-color: var(--primary-hover-color);
+                            }
                         }
                     }
                 }
             }
+
 
             .pagination {
                 button {
@@ -161,6 +163,15 @@
             flex-direction: column;
             .cate-page-content {
                 width: 100%;
+                .cate-page-content-list {
+                    .content-item {
+                        .cate-link-img {
+                            img {
+                                height: unset;
+                            }
+                        }
+                    }
+                }
             }
             .aside {
                 width: 100%;
@@ -178,10 +189,12 @@
         .cate-page-wrap {
             .cate-page-content {
                 flex-wrap: wrap;
-                .content-item {
-                    width: 100%;
-                    padding: 48px 0;
-                    border-bottom: 1px solid #d2d2d2;
+                .cate-page-content-list {
+                    .content-item {
+                        width: 100%;
+                        padding: 48px 0;
+                        border-bottom: 1px solid #d2d2d2;
+                    }
                 }
             }
         }
