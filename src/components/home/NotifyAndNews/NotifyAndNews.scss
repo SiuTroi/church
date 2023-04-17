@@ -7,11 +7,12 @@
     .noticeAndnew-item {
         padding: 0 12px;
         width: 25%;
+        margin-bottom: 32px;
 
         a {
             img {
                 width: 100%;
-                height: 136px;
+                height: 160px;
                 object-fit: cover;
                 border-radius: 12px;
             }
@@ -35,10 +36,12 @@
                     font-weight: 700;
                 }
             }
-            p {
+            .less-content {
                 font-size: 17px;
                 color: var(--text-color);
                 margin: 6px 0;
+                height: 60px;
+                overflow: hidden;
             }
             span {
                 font-size: 15px;
@@ -55,7 +58,6 @@
             flex-wrap: wrap;
             .noticeAndnew-item {
                 width: 50%;
-                margin-bottom: 12px;
                 a {
                     display: inline-block;
                     img {
@@ -73,7 +75,6 @@
             flex-wrap: wrap;
             .noticeAndnew-item {
                 width: 100%;
-                margin-bottom: 32px;
             }
         }
     }

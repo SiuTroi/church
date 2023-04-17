@@ -10,6 +10,7 @@ import ngayPhuNuTinLanh from "../../../images/ngay-phu-nu-tin-lanh.jpg";
 import truyenGiangThieuNhi from "../../../images/truyen-giang-thieu-nhi.jpg";
 import truyenGiangGiangSingThieuNhi from "../../../images/truyen-giang-giang-sinh-thieu-nhi.jpg";
 import triAnGiaoVienTruongChuaNhat from "../../../images/tri-an-giao-vien-truong-chua-nhat.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const newVideoList = [
   {
@@ -111,8 +112,9 @@ function NewVideo() {
               key={index}
               onClick={() => setVideoPlay(newVideoItem)}
             >
-              <img src={newVideoItem.img} alt="" />
-              <div>
+              <LazyLoadImage
+                effect="blur" src={newVideoItem.img} alt={newVideoItem.title}    />
+              <div className="home-newvideo-item-content">
                 {newVideoItem.tags.map((tag, tagIndex) => (
                   <Link to={`/${removeVietnameseAccents(tag)}`} key={tagIndex}>{tag}</Link>
                 ))}

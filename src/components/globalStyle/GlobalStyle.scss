@@ -14,7 +14,6 @@
 
 
 html {
-
 }
 
 body {
@@ -25,6 +24,7 @@ body {
     margin: 0;padding: 0;
     box-sizing: border-box;
     transition: all .2s ease-out;
+    scroll-behavior: smooth;
 }
 
 a {
@@ -138,5 +138,9 @@ section {
     .section-title {
         flex-direction: column;
         align-items: flex-start;
+
+        h1 {
+            font-size: 32px;
+        }
     }
 }

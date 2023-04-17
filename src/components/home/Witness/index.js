@@ -5,6 +5,7 @@ import { getPostAsCategoryDirected } from "../../../api";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import { uriImage } from "../../../constants";
 import Loading from "../../Loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Witness({ category }) {
   const [witnessListArray, setWitnessListArray] = useState([]);
@@ -40,10 +41,9 @@ function Witness({ category }) {
         {witnessListArray.map((witnessItem, index) => (
           <div className="witness-item" key={index}>
             <Link to={`/${catePath}/${encodeURIComponent(witnessItem.title)}`} className="witness-item-link">
-              {isLoading && <Loading position="relative" bg="unset" />}
-                <img src={`${uriImage}${witnessItem.image}`}
-                onLoad={handleImageLoad} alt={witnessItem.title} 
-                style={{ display: isLoading ? 'none' : 'block' }}
+                <LazyLoadImage
+                effect="blur" src={`${uriImage}${witnessItem.image}`}
+                alt={witnessItem.title} 
                 />
             </Link>
             <div>
@@ -52,7 +52,7 @@ function Witness({ category }) {
                     {witnessItem.title}
                 </Link>
                 </h4>
-                <p className="three-dot" dangerouslySetInnerHTML={{__html: witnessItem.content }}></p>
+                <p className="three-dot less-content" dangerouslySetInnerHTML={{__html: witnessItem.content }}></p>
                 <span>{dateConvert(witnessItem.createdAt)}</span>
             </div>
           </div>

@@ -1,7 +1,8 @@
 .cate-page {
-    margin-top: var(--header-height);
+    padding-top: 0;
     .cate-page-wrap {
         display: flex;
+        margin-top: 32px !important;
 
         .cate-page-content {
             width: 65%;

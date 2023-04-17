@@ -19,7 +19,7 @@ function App() {
       setCategories(data);
     };
     getAllCategory();
-  }, [categories]);
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>
@@ -28,9 +28,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-
             {/* Category */}
-            {categories.map((categoryItem, index) => {
+            {categories.length > 0 && categories.map((categoryItem, index) => {
               let catePath = removeVietnameseAccents(categoryItem.category);
               return (
                 <Route
@@ -42,7 +41,7 @@ function App() {
             })}
 
             {/* Single */}
-            {categories.map((categoryItem, index) => {
+            {categories.length > 0 && categories.map((categoryItem, index) => {
               let catePath = removeVietnameseAccents(categoryItem.category);
               return (
                 <Route

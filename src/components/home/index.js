@@ -54,8 +54,7 @@ function Home() {
       })
     };
     getAllCategory();
-
-  }, [categories]);
+  }, []);
 
   return (
     <>

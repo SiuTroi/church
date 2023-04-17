@@ -8,7 +8,7 @@ function VideoPlay({ videoPlay }) {
     <div className="home-newvideo-play">
       <iframe
         width="100%"
-        height="512"
+        height="100%"
         style={{ borderRadius: "12px" }}
         src={isOnPlay ? videoPlay.videoSrc + '?autoplay=1&mute=1' : videoPlay.videoSrc}
         title="YouTube video player"

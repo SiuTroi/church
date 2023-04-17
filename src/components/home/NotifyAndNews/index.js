@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import { getPostAsCategoryDirected } from "../../../api";
 import { uriImage } from "../../../constants";
-import Loading from "../../Loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function NotifyAndNews({ category }) {
   const [notifyAndNewsListArray, setNotifyAndNewsListArray] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const catePath = removeVietnameseAccents(category);
 
   useEffect(() => {
@@ -19,10 +18,6 @@ function NotifyAndNews({ category }) {
     };
     getGwwPost();
   }, []);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
 
   return (
     <section className="container noticeAndnew">
@@ -40,12 +35,11 @@ function NotifyAndNews({ category }) {
         {notifyAndNewsListArray.map((notifyAndNewsItem, index) => (
           <div className="noticeAndnew-item" key={index}>
             <Link to={`/${catePath}/${encodeURIComponent(notifyAndNewsItem.title)}`}>
-              {isLoading && <Loading position="relative" bg="unset" />}
-              <img
+              <LazyLoadImage
+                effect="blur"
                 src={`${uriImage}${notifyAndNewsItem.image}`}
-                onLoad={handleImageLoad}
-                alt=""
-                style={{ display: isLoading ? "none" : "block" }}
+                 
+                alt={notifyAndNewsItem.title}
               />
             </Link>
             <div>
@@ -56,7 +50,7 @@ function NotifyAndNews({ category }) {
                 </Link>
               </h4>
               <p
-                className="three-dot"
+                className="three-dot less-content"
                 dangerouslySetInnerHTML={{ __html: notifyAndNewsItem.content }}
               ></p>
               <span>{dateConvert(notifyAndNewsItem.createdAt)}</span>

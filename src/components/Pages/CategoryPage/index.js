@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { dateConvert, removeVietnameseAccents } from '../../../utils';
 import { uriImage } from '../../../constants';
 import Loading from "../../Loading";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 const CategoryPage = React.memo(({ category }) => {
@@ -14,7 +15,6 @@ const CategoryPage = React.memo(({ category }) => {
   const [startPost, setStartPost] = useState(0);
   const [curretPagination, setCurretPagination] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingImg, setIsLoadingImg] = useState(true);
 
   const catePath = removeVietnameseAccents(category);
   const limit = 10;
@@ -46,10 +46,6 @@ const CategoryPage = React.memo(({ category }) => {
     getCountPostByCategoryAsync();
   }, [category, startPost]);
 
-  const handleImageLoad = () => {
-    setIsLoadingImg(false);
-  };
-
   const pagination = Array.from(
     { length: Math.ceil(countPostByCategory / limit) },
     (_, i) => i + 1
@@ -63,18 +59,23 @@ const CategoryPage = React.memo(({ category }) => {
         <>
           {isLoading && <Loading />}
           <section className="cate-page">
+            <div className="path">
+              <div className="path-container">
+                <h1>{category}</h1>
+              </div>
+            </div>
+
             <div className="container cate-page-wrap">
               <div className='cate-page-content'>
                 <div className="cate-page-content-list">
                   {allPostByCate.map((postItem, index) => (
                     <div className="content-item" key={index}>
                       <Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`} className="cate-link-img">
-                        {isLoadingImg && <Loading position="relative" bg="unset" />}
-                        <img 
+                        <LazyLoadImage
+                          effect="blur" 
                           src={`${uriImage}${postItem.image}`}
-                          onLoad={handleImageLoad}
                           alt="" 
-                          style={{ display: isLoadingImg ? 'none' : 'block' }}
+                           
                           />
                       </Link>
                       <div className="content-desc">
@@ -115,12 +116,11 @@ const CategoryPage = React.memo(({ category }) => {
                   {postAsDirected.map((postAsDirectedItem, index) => (
                     <li className="new-post-item" key={index}>
                       <Link to={`/${removeVietnameseAccents(postAsDirectedItem.category)}/${encodeURIComponent(postAsDirectedItem.title)}`} className="new-post-img">
-                        {isLoadingImg && <Loading position="relative" bg="unset" />}
-                        <img
+                        <LazyLoadImage
+                          effect="blur"
                           src={`${uriImage}${postAsDirectedItem.image}`}
-                          onLoad={handleImageLoad}
                           alt={postAsDirectedItem.title} 
-                          style={{ display: isLoadingImg ? 'none' : 'block' }}
+                           
                         />
                       </Link>
                       <div className="new-post-desc">

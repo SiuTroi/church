@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 import { getPostAsCategoryDirected } from "../../../api";
 import { removeVietnameseAccents } from "../../../utils";
 import { uriImage } from "../../../constants";
-import Loading from "../../Loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function GodWordWord({ category }) {
   const [gwwListArray, setGwwListArray] = useState([]);
   const [gwwBloggerFeatured, setGwwBloggerFeatured] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const catePath = removeVietnameseAccents(category);
 
   useEffect(() => {
@@ -22,9 +21,6 @@ function GodWordWord({ category }) {
     getGwwPost();
   }, []);
 
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
   
   return (
     <section className="container gww">
@@ -41,12 +37,11 @@ function GodWordWord({ category }) {
       <div className="gww-container">
         <div className="gww-blogger-featured">
           <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured.title)}`}>
-            {isLoading && <Loading position="relative" bg="unset" />}
-            <img
+            <LazyLoadImage
+              effect="blur"
               src={`${uriImage}${gwwBloggerFeatured.image}`}
-              onLoad={handleImageLoad}
-              alt=""
-              style={{ display: isLoading ? 'none' : 'block' }}
+              alt={gwwBloggerFeatured.title}
+               
             />
           </Link>
           <h4>
@@ -63,11 +58,11 @@ function GodWordWord({ category }) {
                 to={`${catePath}/${encodeURIComponent(gwwItem.title)}`}
                 className="gww-item-link"
               >
-                {isLoading && <Loading position="relative" bg="unset" />}
-                <img
+                <LazyLoadImage
+                effect="blur"
                   src={`${uriImage}${gwwItem.image}`}
-                  onLoad={handleImageLoad}
-                  alt=""
+                  alt={gwwItem.title}
+                   
                 />
               </Link>
               <div className="gww-item-content">

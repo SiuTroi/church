@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { uriImage } from "../../../constants";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import Loading from "../../Loading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Single() {
   const { title } = useParams();
@@ -42,6 +43,7 @@ function Single() {
     };
     getPostDetailAsync();
   }, [title]);
+  
 
   function shareToFacebook() {
     // Construct the URL to share
@@ -103,7 +105,8 @@ function Single() {
       <section className="container single-container">
         <article className="single-container-main">
           <div className="single-content">
-            <img src={`${uriImage}${postDetail.image}`} alt="" />
+            <LazyLoadImage
+                effect="blur"   src={`${uriImage}${postDetail.image}`} alt="" />
             <p className="single-desc">{postDetail.description}</p>
             <div dangerouslySetInnerHTML={{ __html: postDetail.content }}></div>
           </div>
@@ -180,10 +183,11 @@ function Single() {
                         )}/${encodeURIComponent(relatedPostItem.title)}`}
                         className="alignleft post-rollover this-ready"
                       >
-                        <img
-                          className="lazy-load preload-me is-loaded lazy-hidden"
+                        <LazyLoadImage
+                          effect="blur"
                           src={`${uriImage}${relatedPostItem.image}`}
                           alt={relatedPostItem.title}
+                           
                         />
                       </Link>
                     </div>
@@ -236,9 +240,11 @@ function Single() {
                         assidePostItem.category
                       )}/${encodeURIComponent(assidePostItem.title)}`}
                     >
-                      <img
+                      <LazyLoadImage
+                        effect="blur"
                         src={`${uriImage}${assidePostItem.image}`}
                         alt={assidePostItem.title}
+                         
                       />
                     </Link>
                     <div className="post-content">
