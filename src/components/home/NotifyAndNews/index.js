@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./NotifyAndNews.scss";
+import "./NotifyAndNews.css";
 import { useEffect, useState } from "react";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import { getPostAsCategoryDirected } from "../../../api";

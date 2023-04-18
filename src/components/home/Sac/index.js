@@ -1,4 +1,4 @@
-import "./Sac.scss";
+import "./Sac.css";
 import { useEffect, useState } from "react";
 import { removeVietnameseAccents } from "../../../utils";
 import { getPostAsCategoryDirected } from "../../../api";

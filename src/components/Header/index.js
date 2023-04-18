@@ -1,4 +1,4 @@
-import "./Header.scss";
+import "./Header.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { removeVietnameseAccents } from "../../utils";

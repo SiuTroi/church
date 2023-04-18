@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./NewVideo.scss";
+import "./NewVideo.css";
 import VideoPlay from "./VideoPlay";
 import { useState } from "react";
 import { removeVietnameseAccents } from "../../../utils";
@@ -107,8 +107,6 @@ function NewVideo() {
           {newVideoList.map((newVideoItem, index) => (
             <div
               className="home-newvideo-item"
-              data-src="https://www.youtube.com/embed/Ra52CpsVRqU"
-              image-url="https://i.ytimg.com/vi/aN5HuMEEOvA/maxresdefault.jpg"
               key={index}
               onClick={() => setVideoPlay(newVideoItem)}
             >

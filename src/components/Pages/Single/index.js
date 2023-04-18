@@ -4,7 +4,7 @@ import {
   getPostAsDirected,
   getPostDetail,
 } from "../../../api";
-import "./Singgle.scss";
+import "./Singgle.css";
 import { useEffect, useState } from "react";
 import { uriImage } from "../../../constants";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";

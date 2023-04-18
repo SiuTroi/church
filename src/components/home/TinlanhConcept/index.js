@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./TinlanhConcept.scss";
+import "./TinlanhConcept.css";
 import { useState } from "react";
 
 function TinlanhConcept() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './CategoryPage.scss';
+import './CategoryPage.css';
 import { getCountPostByCategory, getPostAsCategoryDirected, getPostAsDirected, getPostByCategory } from '../../../api';
 import { Link } from 'react-router-dom';
 import { dateConvert, removeVietnameseAccents } from '../../../utils';

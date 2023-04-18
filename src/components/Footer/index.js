@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Footer.scss";
+import "./Footer.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Footer() {

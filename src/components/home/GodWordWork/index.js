@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./GodWordWord.scss";
+import "./GodWordWord.css";
 import { useEffect, useState } from "react";
 import { getPostAsCategoryDirected } from "../../../api";
 import { removeVietnameseAccents } from "../../../utils";
