@@ -79,14 +79,14 @@ function Home() {
       <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
       <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
       <link rel="canonical" href="https://church-tan.vercel.app/" />
-      <meta name="description" content={homeSeo.description}  />
+      {homeSeo.description && <meta name="description" content={homeSeo.description.trim()}  />}
       <meta name="keywords" content={homeSeo.keyword} />
       <meta name="author" content="Hội thánh tin lành" />
       <meta property="og:locale" content="vi_VN" />
       <meta property="og:url" content="https://church-tan.vercel.app/" />
       <meta property="og:auther" content="Hội thánh tin lành" />
       <meta property="og:keywords" content={homeSeo.keyword} />
-      <meta property="og:description" content={homeSeo.description} />
+      {homeSeo.description && <meta property="og:description" content={homeSeo.description.trim()} />}
       <meta property="og:image" content={homeSite.logo} />
       <meta property="og:type" content="article" />
     </Helmet>

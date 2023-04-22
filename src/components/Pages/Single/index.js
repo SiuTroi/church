@@ -107,7 +107,7 @@ function Single() {
         <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
         <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
         {postDetail?.category && <link rel="canonical" href={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
-        <meta name="description" content={postDetail.description}  />
+        {postDetail.description && <meta name="description" content={postDetail.description.trim()}  />}
         <meta name="category" content={postDetail.category}  />
         <meta name="keywords" content={`${postDetail.title}, ${postDetail.category}`} />
         <meta name="content" content={postDetail.content} />
@@ -115,7 +115,7 @@ function Single() {
         {postDetail?.category && <meta property="og:url" content={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
         <meta property="og:auther" content="Hội thánh tin lành" />
         <meta property="og:keywords" content={`${postDetail.title}, ${postDetail.category}`} />
-        <meta property="og:description" content={postDetail.description} />
+        {postDetail.description && <meta property="og:description" content={postDetail.description.trim()} />}
         <meta property="og:category" content={postDetail.category} />
         <meta property="og:image" content={`${uriImage}${postDetail.image}`} />
         <meta property="og:type" content="article" />
