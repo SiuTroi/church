@@ -34,7 +34,7 @@ function App() {
               return (
                 <Route
                   path={`/${catePath}`}
-                  element={<CategoryPage category={categoryItem.category} />}
+                  element={<CategoryPage category={categoryItem.category} categoryItem={categoryItem} />}
                   key={index}
                 />
               );

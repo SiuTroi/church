@@ -11,7 +11,8 @@
       line-height: 32px;
       color: #6c6f72; }
     .footer .footer-container .footer-map {
-      width: 100%; }
+      width: 100%;
+      overflow: hidden; }
     .footer .footer-container .footer-logo-link {
       display: inline-block;
       margin-bottom: 48px; }

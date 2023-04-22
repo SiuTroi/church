@@ -31,6 +31,9 @@
                 margin-top: 24px;
                 margin-bottom: 12px;
             }
+            span {
+                display: unset !important;
+            }
             p {
                 font-size: 18px;
                 line-height: 1.6;
@@ -38,6 +41,7 @@
             }
             img {
                 max-width: 100%;
+                width: 100%;
             }
         }
         
@@ -296,6 +300,8 @@
 
         .aside {
             border: none;margin-top: 50px;
+            padding-left: 0;
+            margin-left: 0;
         }
     }
 }

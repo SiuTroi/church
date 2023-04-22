@@ -25,12 +25,15 @@
         font-style: italic;
         margin-top: 24px;
         margin-bottom: 12px; }
+      .single-container .single-container-main .single-content span {
+        display: unset !important; }
       .single-container .single-container-main .single-content p {
         font-size: 18px;
         line-height: 1.6;
         margin-bottom: 10px; }
       .single-container .single-container-main .single-content img {
-        max-width: 100%; }
+        max-width: 100%;
+        width: 100%; }
     .single-container .single-container-main .post-meta {
       margin-bottom: 55px; }
       .single-container .single-container-main .post-meta .entry-meta, .single-container .single-container-main .post-meta .entry-tags {
@@ -217,7 +220,9 @@
     flex-direction: column; }
     .single-container .aside {
       border: none;
-      margin-top: 50px; } }
+      margin-top: 50px;
+      padding-left: 0;
+      margin-left: 0; } }
 
 @media (max-width: 767px) {
   .single-container {

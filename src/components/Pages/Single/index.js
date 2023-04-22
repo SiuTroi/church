@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import {
+  getHomeSite,
   getPostAsCategoryDirected,
   getPostAsDirected,
   getPostDetail,
@@ -10,14 +11,15 @@ import { uriImage } from "../../../constants";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import Loading from "../../Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Helmet } from "react-helmet";
 
 function Single() {
   const { title } = useParams();
+  const [homeSite, setHomeSite] = useState({});
   const [postDetail, setPostDetail] = useState({});
   const [relatedPost, setRelatedPost] = useState([]);
   const [assidePost, setAssidePost] = useState([]);
   const [loading, setLoading] = useState(false);
-  window.document.title = title;
 
   useEffect(() => {
     setLoading(true);
@@ -39,6 +41,11 @@ function Single() {
       const assidePostRespone = await getPostAsDirected(0, 6);
       const assidePostData = await assidePostRespone.data;
       setAssidePost(assidePostData);
+      setLoading(false);
+
+      const homeSiteRespone = await getHomeSite();
+      const homeSitedata = await homeSiteRespone.data;
+      setHomeSite(homeSitedata[0]);
       setLoading(false);
     };
     getPostDetailAsync();
@@ -95,6 +102,25 @@ function Single() {
     : "";
   return (
     <>
+      <Helmet>
+        <title>{postDetail.title}</title>
+        <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
+        <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
+        {postDetail?.category && <link rel="canonical" href={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
+        <meta name="description" content={postDetail.description}  />
+        <meta name="category" content={postDetail.category}  />
+        <meta name="keywords" content={`${postDetail.title}, ${postDetail.category}`} />
+        <meta name="content" content={postDetail.content} />
+        <meta name="author" content="Hội thánh tin lành" />
+        {postDetail?.category && <meta property="og:url" content={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
+        <meta property="og:auther" content="Hội thánh tin lành" />
+        <meta property="og:keywords" content={`${postDetail.title}, ${postDetail.category}`} />
+        <meta property="og:description" content={postDetail.description} />
+        <meta property="og:category" content={postDetail.category} />
+        <meta property="og:image" content={`${uriImage}${postDetail.image}`} />
+        <meta property="og:type" content="article" />
+      </Helmet>
+
       {loading && <Loading />}
       <div className="path">
         <div className="path-container">

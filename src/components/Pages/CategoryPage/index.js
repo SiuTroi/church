@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './CategoryPage.css';
-import { getCountPostByCategory, getPostAsCategoryDirected, getPostAsDirected, getPostByCategory } from '../../../api';
+import { getCountPostByCategory, getHomeSeo, getHomeSite, getPostAsCategoryDirected, getPostAsDirected, getPostByCategory } from '../../../api';
 import { Link } from 'react-router-dom';
 import { dateConvert, removeVietnameseAccents } from '../../../utils';
 import { uriImage } from '../../../constants';
 import Loading from "../../Loading";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Helmet } from 'react-helmet';
 
 
-const CategoryPage = React.memo(({ category }) => {
+const CategoryPage = React.memo(({ category, categoryItem }) => {
+  const [homeSite, setHomeSite] = useState({});
   const [allPostByCate, setAllPostByCate] = useState([]);
   const [postAsDirected, setPostAsDirected] = useState([]);
   const [countPostByCategory, setcountPostByCategory] = useState(0);
@@ -18,10 +20,16 @@ const CategoryPage = React.memo(({ category }) => {
 
   const catePath = removeVietnameseAccents(category);
   const limit = 10;
-  window.document.title = category;
 
+  console.log(category)
   useEffect(() => {
     setIsLoading(true);
+    const getHomeSiteAsync = async () => {
+      const respone = await getHomeSite();
+      const data = await respone.data;
+      setHomeSite(data[0]);
+      setIsLoading(false);
+    }
     const getAllPostByCateAsync = async () => {
       const respone = await getPostAsCategoryDirected(category, startPost, limit);
       const data = await respone.data;
@@ -40,7 +48,7 @@ const CategoryPage = React.memo(({ category }) => {
       setcountPostByCategory(data);
       setIsLoading(false);
     }
-
+    getHomeSiteAsync();
     getAllPostByCateAsync();
     getPostAsDirectedAsync();
     getCountPostByCategoryAsync();
@@ -57,6 +65,25 @@ const CategoryPage = React.memo(({ category }) => {
   };
     return (
         <>
+        <Helmet>
+          <title>{categoryItem.category}</title>
+          <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
+          <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
+          <link rel="canonical" href={`https://church-tan.vercel.app/${removeVietnameseAccents(categoryItem.category)}`} />
+          <meta name="description" content={categoryItem.seo.description}  />
+          <meta name="category" content={categoryItem.category}  />
+          <meta name="keywords" content={categoryItem.seo.keyword} />
+          <meta name="author" content="Hội thánh tin lành" />
+          <meta property="og:locale" content="vi_VN" />
+          <meta property="og:url" content={`https://church-tan.vercel.app/${removeVietnameseAccents(categoryItem.category)}`} />
+          <meta property="og:auther" content="Hội thánh tin lành" />
+          <meta property="og:keywords" content={categoryItem.seo.keyword} />
+          <meta property="og:description" content={categoryItem.seo.description} />
+          <meta property="og:category" content={categoryItem.category} />
+          <meta property="og:image" content={categoryItem.seo.image} />
+          <meta property="og:type" content="article" />
+        </Helmet>
+
           {isLoading && <Loading />}
           <section className="cate-page">
             <div className="path">
