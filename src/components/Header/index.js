@@ -5,8 +5,11 @@ import { removeVietnameseAccents } from "../../utils";
 import { getCategories } from "../../api"
 import logo from "../../images/logo.svg"
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useHomeSeo } from "../../hooks/useHomeSeo";
+import { uriImage } from "../../constants";
 
 function Header() {
+  const { homeSeo, homeSite } = useHomeSeo();
   const [showSearchWraper, setShowSearchWraper] = useState(false);
   const [showCateMobile, setShowCateMobile] = useState(false);
   const [showMoreCate, setShowMoreCate] = useState(false);
@@ -35,6 +38,7 @@ function Header() {
     window.scrollTo(0, 0);
   }
 
+  // console.log(homeSite)
   const showCateListArray = window.innerWidth > 1023 ? cateListArray.show : cateListArray.show.concat(cateListArray.hide);
   return (
     <header className="header">
@@ -42,8 +46,9 @@ function Header() {
         <Link to={'/'} className="">
           <LazyLoadImage
             effect="blur"
-            src={logo}
-            alt="WATV"
+            src={`${uriImage}${homeSite.logo}`}
+            alt={`$${homeSeo.title}`}
+            className="logo-img header-logo"
           />
         </Link>
 

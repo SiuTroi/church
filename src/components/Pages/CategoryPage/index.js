@@ -7,10 +7,10 @@ import { uriImage } from '../../../constants';
 import Loading from "../../Loading";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Helmet } from 'react-helmet';
-
+import { useHomeSeo } from "../../../hooks/useHomeSeo"
 
 const CategoryPage = React.memo(({ category, categoryItem }) => {
-  const [homeSite, setHomeSite] = useState({});
+  const { homeSite } = useHomeSeo();
   const [allPostByCate, setAllPostByCate] = useState([]);
   const [postAsDirected, setPostAsDirected] = useState([]);
   const [countPostByCategory, setcountPostByCategory] = useState(0);
@@ -24,12 +24,6 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
   console.log(category)
   useEffect(() => {
     setIsLoading(true);
-    const getHomeSiteAsync = async () => {
-      const respone = await getHomeSite();
-      const data = await respone.data;
-      setHomeSite(data[0]);
-      setIsLoading(false);
-    }
     const getAllPostByCateAsync = async () => {
       const respone = await getPostAsCategoryDirected(category, startPost, limit);
       const data = await respone.data;
@@ -48,11 +42,11 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
       setcountPostByCategory(data);
       setIsLoading(false);
     }
-    getHomeSiteAsync();
     getAllPostByCateAsync();
     getPostAsDirectedAsync();
     getCountPostByCategoryAsync();
   }, [category, startPost]);
+
 
   const pagination = Array.from(
     { length: Math.ceil(countPostByCategory / limit) },
@@ -63,6 +57,7 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
     setStartPost(number);
     setCurretPagination(index)
   };
+
     return (
         <>
         <Helmet>
@@ -110,17 +105,13 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
                           <Link to={`/${catePath}`} className="tag-item">{postItem.category}</Link>
                         </div>
                         <h1><Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`}>{postItem.title}</Link></h1>
-                        <p className='three-dot'>
+                        <div className='three-dot'>
                           {postItem.description.trim().length > 0 
                             ? postItem.description 
-                            : <div dangerouslySetInnerHTML={{ __html: postItem.content}} 
-                                style={{
-                                  height: '77px',
-                                  overflow: 'hidden'
-                                }}>
+                            : <div dangerouslySetInnerHTML={{ __html: postItem.content}}>
                               </div>}
-                        </p>
-                        <p><time>{dateConvert(postItem.createdAt)}</time></p>
+                        </div>
+                        <p><time className='time'>{dateConvert(postItem.createdAt)}</time></p>
                         <Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`} className='readmore-btn'>Read more</Link>
                       </div>
                     </div>

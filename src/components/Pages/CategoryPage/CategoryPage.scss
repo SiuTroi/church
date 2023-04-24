@@ -44,7 +44,7 @@
                     }
     
                     .content-desc {
-                        p {
+                        div {
                             font-size: 15px;
                             color: #6c6f72;
                             margin: 8px 0;
@@ -55,10 +55,14 @@
                             overflow: hidden;
                             text-overflow: ellipsis;
     
-                            time {
-                                font-size: 13px;
-                            }
                         }
+                        p {
+                            margin-bottom: 12px;
+                            .time {
+                                font-size: 12px;
+                                color: #adadad;
+                            }
+                        } 
     
                         .readmore-btn {
                             display: inline-block;
@@ -182,6 +186,8 @@
             }
         }
     }
+
+    
 }
 
 @media (max-width: 767px) {

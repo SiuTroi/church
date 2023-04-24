@@ -22,6 +22,8 @@
     align-items: center;
     text-align: center;
     color: var(--white-color); }
+    .header .header-nav .header-logo {
+      height: 52px; }
     .header .header-nav .header-action .btn-ellipsis {
       font-size: 20px;
       margin-left: 4px;

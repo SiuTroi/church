@@ -12,10 +12,11 @@ import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import Loading from "../../Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Helmet } from "react-helmet";
+import { useHomeSeo } from "../../../hooks/useHomeSeo";
 
 function Single() {
   const { title } = useParams();
-  const [homeSite, setHomeSite] = useState({});
+  const { homeSite }= useHomeSeo();
   const [postDetail, setPostDetail] = useState({});
   const [relatedPost, setRelatedPost] = useState([]);
   const [assidePost, setAssidePost] = useState([]);
@@ -41,11 +42,6 @@ function Single() {
       const assidePostRespone = await getPostAsDirected(0, 6);
       const assidePostData = await assidePostRespone.data;
       setAssidePost(assidePostData);
-      setLoading(false);
-
-      const homeSiteRespone = await getHomeSite();
-      const homeSitedata = await homeSiteRespone.data;
-      setHomeSite(homeSitedata[0]);
       setLoading(false);
     };
     getPostDetailAsync();

@@ -1,20 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useEffect, useState } from "react";
-import { getHomeSite } from "../../api";
+import { useHomeSeo } from "../../hooks/useHomeSeo";
+import { uriImage } from "../../constants";
 
 function Footer() {
-  const [homeSite, setHomeSite] = useState({});
+  const { homeSite } = useHomeSeo();
 
-  useEffect(() => {
-    const getHomeSiteAsync = async () => {
-      const respone = await getHomeSite();
-      const data = await respone.data;
-      setHomeSite(data[0]);
-    }
-    getHomeSiteAsync()
-  }, [])
   return (
     <footer className="footer">
       <div className="container">
@@ -23,9 +15,9 @@ function Footer() {
             <Link to={'/'} className="footer-logo-link">
               <LazyLoadImage
                 effect="blur"
-                src="https://httlsaigon.org/wp-content/uploads/2021/12/option2-e1638295660831.png"
-                alt="WATV"
-                className="footer-logo"
+                src={`${uriImage}${homeSite.logo}`}
+                alt=""
+                className="footer-logo logo-img"
                  
               />
             </Link>

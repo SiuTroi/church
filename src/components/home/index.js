@@ -1,9 +1,10 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Helmet } from 'react-helmet';
-import { getCategories, getHomeSeo, getHomeSite } from "../../api";
+import { getCategories } from "../../api";
 import { removeVietnameseAccents } from "../../utils";
 import Loading from "../Loading";
 import { uriImage } from "../../constants";
+import { useHomeSeo } from "../../hooks/useHomeSeo";
 
 const GodWordWork = lazy(() => import('./GodWordWork'));
 const NewVideo = lazy(() => import('./NewVideo'));
@@ -15,8 +16,7 @@ const Banner = lazy(() => import('./Banner'));
 
 
 function Home() {
-  const [homeSeo, setHomeSeo] = useState({});
-  const [homeSite, setHomeSite] = useState({});
+  const {homeSeo, homeSite} = useHomeSeo();
   const [categories, setCategories] = useState({
     all: [],
     godWordWork: "",
@@ -24,18 +24,6 @@ function Home() {
     notifyAndNews: "",
   });
   useEffect(() => {
-    const getHomeSeoAsync = async () => {
-      const respone = await getHomeSeo();
-      const data = await respone.data;
-      setHomeSeo(data[0]);
-    };
-    getHomeSeoAsync();
-    const getHomeSiteAsync = async () => {
-      const respone = await getHomeSite();
-      const data = await respone.data;
-      setHomeSite(data[0]);
-    }
-    getHomeSiteAsync();
     const getAllCategory = async () => {
       const respone = await getCategories();
       const data = await respone.data;
@@ -71,7 +59,6 @@ function Home() {
     getAllCategory();
   }, []);
 
-  console.log(homeSeo)
   return (
     <>
     <Helmet>
