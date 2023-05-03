@@ -3,7 +3,7 @@ import './CategoryPage.css';
 import { getCountPostByCategory, getHomeSeo, getHomeSite, getPostAsCategoryDirected, getPostAsDirected, getPostByCategory } from '../../../api';
 import { Link } from 'react-router-dom';
 import { dateConvert, removeVietnameseAccents } from '../../../utils';
-import { uriImage } from '../../../constants';
+import { uriDomain, uriImage } from '../../../constants';
 import Loading from "../../Loading";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Helmet } from 'react-helmet';
@@ -21,7 +21,6 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
   const catePath = removeVietnameseAccents(category);
   const limit = 10;
 
-  console.log(category)
   useEffect(() => {
     setIsLoading(true);
     const getAllPostByCateAsync = async () => {
@@ -64,13 +63,13 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
           <title>{categoryItem.category}</title>
           <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
           <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
-          <link rel="canonical" href={`https://church-tan.vercel.app/${removeVietnameseAccents(categoryItem.category)}`} />
+          <link rel="canonical" href={`${uriDomain}${removeVietnameseAccents(categoryItem.category)}`} />
           <meta name="description" content={categoryItem.seo.description}  />
           <meta name="category" content={categoryItem.category}  />
           <meta name="keywords" content={categoryItem.seo.keyword} />
           <meta name="author" content="Hội thánh tin lành" />
           <meta property="og:locale" content="vi_VN" />
-          <meta property="og:url" content={`https://church-tan.vercel.app/${removeVietnameseAccents(categoryItem.category)}`} />
+          <meta property="og:url" content={`${uriDomain}${removeVietnameseAccents(categoryItem.category)}`} />
           <meta property="og:auther" content="Hội thánh tin lành" />
           <meta property="og:keywords" content={categoryItem.seo.keyword} />
           <meta property="og:description" content={categoryItem.seo.description} />
@@ -104,7 +103,7 @@ const CategoryPage = React.memo(({ category, categoryItem }) => {
                         <div className="tags">
                           <Link to={`/${catePath}`} className="tag-item">{postItem.category}</Link>
                         </div>
-                        <h1><Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`}>{postItem.title}</Link></h1>
+                        <h1 className='two-dot'><Link to={`/${catePath}/${encodeURIComponent(postItem.title)}`}>{postItem.title}</Link></h1>
                         <div className='three-dot'>
                           {postItem.description.trim().length > 0 
                             ? postItem.description 

@@ -7,7 +7,7 @@ import {
 } from "../../../api";
 import "./Singgle.css";
 import { useEffect, useState } from "react";
-import { uriImage } from "../../../constants";
+import { uriDomain, uriImage } from "../../../constants";
 import { dateConvert, removeVietnameseAccents } from "../../../utils";
 import Loading from "../../Loading";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -102,13 +102,13 @@ function Single() {
         <title>{postDetail.title}</title>
         <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
         <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
-        {postDetail?.category && <link rel="canonical" href={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
+        {postDetail?.category && <link rel="canonical" href={`${uriDomain}${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
         {postDetail.description && <meta name="description" content={postDetail.description.trim()}  />}
         <meta name="category" content={postDetail.category}  />
         <meta name="keywords" content={`${postDetail.title}, ${postDetail.category}`} />
         <meta name="content" content={postDetail.content} />
         <meta name="author" content="Hội thánh tin lành" />
-        {postDetail?.category && <meta property="og:url" content={`https://church-tan.vercel.app/${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
+        {postDetail?.category && <meta property="og:url" content={`${uriDomain}${removeVietnameseAccents(postDetail?.category)}/${postDetail.title}`} />}
         <meta property="og:auther" content="Hội thánh tin lành" />
         <meta property="og:keywords" content={`${postDetail.title}, ${postDetail.category}`} />
         {postDetail.description && <meta property="og:description" content={postDetail.description.trim()} />}
@@ -241,16 +241,17 @@ function Single() {
         <aside className="aside">
           <div className="single-search">
             <div className="search-title">Tìm kiếm</div>
-            <div className="search-wrap">
+            <form action="/search" className="search-wrap">
               <input
                 type="text"
                 className="search-input"
                 placeholder="Nhập từ khóa và nhấn Enter"
+                name="title"
               />
               <button>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </button>
-            </div>
+            </form>
           </div>
           <div className="presscore-blog-posts">
             <ul className="presscore-blog-posts-list">

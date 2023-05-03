@@ -8,6 +8,7 @@ import Loading from "./components/Loading";
 
 const Header = lazy(() => import("./components/Header"));
 const Home = lazy(() => import("./components/home"));
+const Search = lazy(() => import("./components/Pages/Search"));
 const Footer = lazy(() => import("./components/Footer"));
 
 function App() {
@@ -51,6 +52,9 @@ function App() {
                 />
               );
             })}
+
+            {/* Search */}
+            <Route path="/search" element={<Search />} />
           </Routes>
           <Footer />
         </BrowserRouter>

@@ -1,0 +1,11 @@
+.banner {
+  margin-top: var(--header-height); }
+  .banner img {
+    width: 100%;
+    height: 100%; }
+
+@media (max-width: 767px) {
+  .banner {
+    height: 264px; }
+    .banner img {
+      object-fit: cover; } }

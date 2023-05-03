@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { getCategories } from "../../api";
 import { removeVietnameseAccents } from "../../utils";
 import Loading from "../Loading";
-import { uriImage } from "../../constants";
+import { uriDomain, uriImage } from "../../constants";
 import { useHomeSeo } from "../../hooks/useHomeSeo";
 
 const GodWordWork = lazy(() => import('./GodWordWork'));
@@ -65,12 +65,12 @@ function Home() {
       <title>{homeSeo.title}</title>
       <link rel="icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
       <link rel="apple-touch-icon" sizes="32x32" href={`${uriImage}${homeSite.logo}`} />
-      <link rel="canonical" href="https://church-tan.vercel.app/" />
+      <link rel="canonical" href={uriDomain} />
       {homeSeo.description && <meta name="description" content={homeSeo.description.trim()}  />}
       <meta name="keywords" content={homeSeo.keyword} />
       <meta name="author" content="Hội thánh tin lành" />
       <meta property="og:locale" content="vi_VN" />
-      <meta property="og:url" content="https://church-tan.vercel.app/" />
+      <meta property="og:url" content={uriDomain} />
       <meta property="og:auther" content="Hội thánh tin lành" />
       <meta property="og:keywords" content={homeSeo.keyword} />
       {homeSeo.description && <meta property="og:description" content={homeSeo.description.trim()} />}

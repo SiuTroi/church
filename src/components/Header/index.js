@@ -2,8 +2,7 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { removeVietnameseAccents } from "../../utils";
-import { getCategories } from "../../api"
-import logo from "../../images/logo.svg"
+import { getCategories } from "../../api";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useHomeSeo } from "../../hooks/useHomeSeo";
 import { uriImage } from "../../constants";
@@ -38,7 +37,6 @@ function Header() {
     window.scrollTo(0, 0);
   }
 
-  // console.log(homeSite)
   const showCateListArray = window.innerWidth > 1023 ? cateListArray.show : cateListArray.show.concat(cateListArray.hide);
   return (
     <header className="header">
@@ -121,12 +119,12 @@ function Header() {
       {showSearchWraper && (
         <div className="search-input-wrap">
           <div className="search-ui container">
-            <form action="" className="form-search">
+            <form action="/search" className="form-search">
               <input
                 type="text"
                 className="search-input"
                 placeholder="Tìm kiếm..."
-                name=""
+                name="title"
                 id=""
               />
               <button className="search-form-btn">
