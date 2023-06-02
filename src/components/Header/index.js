@@ -24,8 +24,8 @@ function Header() {
       const data = await respone.data;
       setCateListArray(prevState => ({
         ...prevState,
-        show: data.slice(0, 5),
-        hide: data.slice(5, data.length)
+        show: data.slice(0, 4),
+        hide: data.slice(4, data.length)
       }));
     };  
     getCategoriesAsync();
@@ -55,6 +55,9 @@ function Header() {
           style={{ display: showCateMobile && "flex" }}
         >
           <ul className="list-cate">
+            <li className="item-cate">
+              <Link to='/' onClick={hideCateMobileAndScrollToTop}>Trang chủ</Link>
+            </li>
             {showCateListArray.map((cateItem, index) => (
               <li className="item-cate" key={index}>
                 <Link to={removeVietnameseAccents(cateItem.category)} onClick={hideCateMobileAndScrollToTop}>{cateItem.category}</Link>

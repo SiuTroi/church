@@ -2,7 +2,7 @@
     padding-top: 0;
     .cate-page-wrap {
         display: flex;
-        margin-top: 32px !important;
+        margin-top: 32px;
 
         .cate-page-content {
             width: 65%;
@@ -34,8 +34,15 @@
                         }
                     }
                     .cate-link-img {
+                        display: block;
+                        width: 100%;
+
+                        span {
+                            width: 100% !important;
+                        }
                         img {
                             max-width: 100%;
+                            width: 100%;
                             border-radius: 12px;
                             height: 200px;
                             object-fit: cover;
@@ -166,6 +173,9 @@
 
 }
 
+.pastoral-cate-page-wrap {
+    display: block;
+}
 @media (max-width: 1023px) {
     .cate-page {
         .cate-page-wrap {
@@ -198,6 +208,7 @@
     .cate-page {
         padding-top: 0;
         .cate-page-wrap {
+            margin-top: 0;
             .cate-page-content {
                 flex-wrap: wrap;
                 .cate-page-content-list {

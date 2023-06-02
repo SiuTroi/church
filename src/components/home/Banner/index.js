@@ -1,10 +1,12 @@
 import './Banner.css';
-import banner from "../../../images/ban-ner.png"
+import { useHomeSeo } from "../../../hooks/useHomeSeo"
+import { uriImage } from '../../../constants';
 
 function Banner() {
+    const { homeSite } = useHomeSeo()
     return ( 
         <div className="banner">
-            <img src={banner} alt=""    />
+            <img src={`${uriImage}${homeSite.banner}`} alt=""/>
         </div>
      );
 }

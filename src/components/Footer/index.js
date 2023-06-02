@@ -1,32 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Footer.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useHomeSeo } from "../../hooks/useHomeSeo";
 import { uriImage } from "../../constants";
-
+import footerLogo from "../../images/footer_logo.png"
 function Footer() {
+  const { pathname } = useLocation();
   const { homeSite } = useHomeSeo();
 
   return (
-    <footer className="footer">
+    <footer className="footer" style={{ display: pathname === '/gioi-thieu' && 'none'}}>
       <div className="container">
-        <div className=" footer-container">
+        <div className="footer-container">
           <div className="footer-description">
             <Link to={'/'} className="footer-logo-link">
               <LazyLoadImage
                 effect="blur"
-                src={`${uriImage}${homeSite.logo}`}
-                alt=""
+                src={footerLogo}
+                alt="Footer Logo"
                 className="footer-logo logo-img"
                  
               />
             </Link>
-            <p>
-              Là Hội Thánh Tin Lành đầu tiên tại Sài Gòn, trực thuộc Hội Thánh
-              Tin Lành Việt Nam, được thành lập năm 1920 <br />
-              <strong>Sứ mệnh Hội Thánh:</strong> <br />
-              <em>“TẤT CẢ VÌ NGƯỜI CHƯA ĐƯỢC CỨU”</em>
-            </p>
+            <h2> 
+              Aspire Vietnamese Baptist Church
+            </h2>
+            <p>Địa chỉ: <b>{homeSite.address}</b></p>
+            <a href={`tel:${homeSite.phone}`}>Điện thoại: <b>{homeSite.phone}</b></a> <br />
+            <p>Website: <b>{homeSite.website}</b></p>
+            <a href={`mailto:${homeSite.email}`}>Email: <b>{homeSite.email}</b></a>
+            <p>Fanpage: <b>{homeSite.fanpage}</b></p>
           </div>
           <div className="footer-map">
             <div dangerouslySetInnerHTML={{ __html: homeSite.map}}></div>
@@ -34,7 +37,7 @@ function Footer() {
         </div>
         <div className="footer-copyright">
           <p>
-            © 2023. Bản quyền thuộc về <a href='/'>Hội Thánh Tin Lành Sài Gòn</a>
+            © 2023. Bản quyền thuộc về <a href='/'>{homeSite.copyright}</a>
           </p>
           <div className="wrap-social-icon">
             <a target="_blank" href={homeSite.facebook} className="icon-link">

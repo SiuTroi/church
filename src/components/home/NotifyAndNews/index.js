@@ -22,7 +22,7 @@ function NotifyAndNews({ category }) {
   return (
     <section className="container noticeAndnew">
       <div className="noticeAndnew-title section-title">
-        <h1>Thông báo và Tin tức</h1>
+        <h1>Thông báo</h1>
         <div></div>
         <Link to={`/${catePath}`}>
           Xem tất cả{" "}
@@ -38,7 +38,6 @@ function NotifyAndNews({ category }) {
               <LazyLoadImage
                 effect="blur"
                 src={`${uriImage}${notifyAndNewsItem.image}`}
-                 
                 alt={notifyAndNewsItem.title}
               />
             </Link>
@@ -46,7 +45,7 @@ function NotifyAndNews({ category }) {
               <Link to={`/${catePath}`}>{notifyAndNewsItem.category}</Link>
               <h4>
                 <Link to={`/${catePath}/${encodeURIComponent(notifyAndNewsItem.title)}`}>
-                  Cảm tạ Chúa – Dâng lời ước nguyện!
+                  {notifyAndNewsItem.title}
                 </Link>
               </h4>
               <p

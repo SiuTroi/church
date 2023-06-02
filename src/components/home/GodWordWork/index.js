@@ -25,7 +25,8 @@ function GodWordWord({ category }) {
   return (
     <section className="container gww">
       <div className="gww-title section-title">
-        <h1>Lời Chúa nơi làm việc</h1>
+      {/*  Dùng tạm thời cho danh mục "Dưỡng linh" */}
+        <h1>Dưỡng linh</h1>
         <div></div>
         <Link to={`/${catePath}`}>
           Xem tất cả{" "}
@@ -36,20 +37,20 @@ function GodWordWord({ category }) {
       </div>
       <div className="gww-container">
         <div className="gww-blogger-featured">
-          <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured.title)}`}>
+          <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured?.title)}`}>
             <LazyLoadImage
               effect="blur"
-              src={`${uriImage}${gwwBloggerFeatured.image}`}
-              alt={gwwBloggerFeatured.title}
+              src={`${uriImage}${gwwBloggerFeatured?.image}`}
+              alt={gwwBloggerFeatured?.title}
                
             />
           </Link>
           <h4>
-            <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured.title)}`}>
-              {gwwBloggerFeatured.title}
+            <Link to={`${catePath}/${encodeURIComponent(gwwBloggerFeatured?.title)}`}>
+              {gwwBloggerFeatured?.title}
             </Link>
           </h4>
-          <p className="three-dot">{gwwBloggerFeatured.description}</p>
+          <p className="three-dot">{gwwBloggerFeatured?.description}</p>
         </div>
         <div className="gww-list">
           {gwwListArray.map((gwwItem, index) => (

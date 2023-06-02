@@ -225,6 +225,8 @@
       margin-left: 0; } }
 
 @media (max-width: 767px) {
+  .path .path-container {
+    min-height: unset; }
   .single-container {
     flex-direction: column; }
     .single-container .related-item {

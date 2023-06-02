@@ -1,10 +1,10 @@
 .tinlanh-concept-container {
-  display: flex;
-  gap: 32px; }
+  display: flex; }
   .tinlanh-concept-container .ytb-iframe {
-    flex: 1.5;
+    flex: 1;
     position: relative;
-    height: 360px; }
+    height: 360px;
+    padding: 0 20px 0 0; }
   .tinlanh-concept-container .custom-playvideo-btn {
     position: absolute;
     top: 0;
@@ -27,7 +27,8 @@
       color: var(--white-color);
       text-shadow: 1px 0 6px rgba(0, 0, 0, 0.3); }
   .tinlanh-concept-container .tinlanh-concept-text {
-    flex: 1; }
+    flex: 1;
+    padding: 0 0 0 20px; }
     .tinlanh-concept-container .tinlanh-concept-text h6 {
       font-size: 19px;
       color: #6ec1e4; }
@@ -62,6 +63,8 @@
     .tinlanh-concept .tinlanh-concept-container .ytb-iframe {
       flex: 1;
       position: absolute;
-      width: 100%; }
+      width: 100%;
+      padding-right: 0; }
     .tinlanh-concept .tinlanh-concept-container .tinlanh-concept-text {
-      margin-top: 380px; } }
+      margin-top: 380px;
+      padding-left: 0; } }

@@ -307,6 +307,11 @@
 }
 
 @media (max-width: 767px) {
+    .path {
+        .path-container {
+            min-height: unset;
+        }
+    }
     .single-container {
         flex-direction: column;
         .related-item {

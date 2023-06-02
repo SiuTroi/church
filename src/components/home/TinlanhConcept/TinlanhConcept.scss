@@ -1,10 +1,10 @@
 .tinlanh-concept-container {
 	display: flex;
-	gap: 32px;
     
     .ytb-iframe {
-        flex: 1.5; position: relative;
+        flex: 1; position: relative;
         height: 360px;
+        padding: 0 20px 0 0;
     }
 
     .custom-playvideo-btn {
@@ -33,6 +33,7 @@
     
     .tinlanh-concept-text {
         flex: 1;
+        padding: 0 0 0 20px;
         h6 {
             font-size: 19px;
             color: #6ec1e4;
@@ -79,10 +80,12 @@
                 flex: 1;
                 position: absolute;
                 width: 100%;
+                padding-right: 0;
             }
             
             .tinlanh-concept-text {
                 margin-top: 380px;
+                padding-left: 0;
             }
         }
     

@@ -6,7 +6,7 @@
 
 .header {
     position: fixed;
-    background-color: rgba(45, 45, 45, 0.98);
+    background-color: var(--primary-color);
     height: var(--header-height);
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@
                     position: absolute;
                     top: var(--header-height);
                     right: -20px;
-                    background-color: var(--black-color) !important;
+                    background-color: var(--primary-color) !important;
                     display: block;
                     z-index: 999;
                     padding: 20px 30px;
@@ -208,7 +208,7 @@
                             position: absolute;
                             top: var(--header-height);
                             left: -20px;
-                            background-color: var(--black-color) !important;
+                            background-color: var(--primary-color) !important;
                             display: block;
                             z-index: 999;
                             padding: 20px 30px;

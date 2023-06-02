@@ -3,7 +3,7 @@
   padding-top: 0; }
   .cate-page .cate-page-wrap {
     display: flex;
-    margin-top: 32px !important; }
+    margin-top: 32px; }
     .cate-page .cate-page-wrap .cate-page-content {
       width: 65%;
       padding: 20px; }
@@ -28,11 +28,17 @@
               border-radius: 10px; }
               .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .tags .tag-item:hover {
                 background-color: var(--primary-hover-color); }
-          .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .cate-link-img img {
-            max-width: 100%;
-            border-radius: 12px;
-            height: 200px;
-            object-fit: cover; }
+          .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .cate-link-img {
+            display: block;
+            width: 100%; }
+            .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .cate-link-img span {
+              width: 100% !important; }
+            .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .cate-link-img img {
+              max-width: 100%;
+              width: 100%;
+              border-radius: 12px;
+              height: 200px;
+              object-fit: cover; }
           .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .content-desc h1 {
             font-size: 20px; }
           .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item .content-desc div {
@@ -109,6 +115,9 @@
             color: #6c6f72;
             font-size: 12px; }
 
+.pastoral-cate-page-wrap {
+  display: block; }
+
 @media (max-width: 1023px) {
   .cate-page .cate-page-wrap {
     flex-direction: column; }
@@ -124,9 +133,11 @@
 @media (max-width: 767px) {
   .cate-page {
     padding-top: 0; }
-    .cate-page .cate-page-wrap .cate-page-content {
-      flex-wrap: wrap; }
-      .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item {
-        width: 100%;
-        padding: 48px 0;
-        border-bottom: 1px solid #d2d2d2; } }
+    .cate-page .cate-page-wrap {
+      margin-top: 0; }
+      .cate-page .cate-page-wrap .cate-page-content {
+        flex-wrap: wrap; }
+        .cate-page .cate-page-wrap .cate-page-content .cate-page-content-list .content-item {
+          width: 100%;
+          padding: 48px 0;
+          border-bottom: 1px solid #d2d2d2; } }

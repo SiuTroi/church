@@ -1,0 +1,51 @@
+.introduce-bg {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../../../images/introduce_bg.png');
+    background-repeat: repeat-y;
+
+    .introduce-wrapper {
+        padding-bottom: 60px;
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .introduce-content {
+            background-color: #fff;
+            margin-top: 48px;
+            padding: 40px 24px 60px;
+            max-width: 766px;
+            margin-left: auto;
+            margin-right: auto;
+            p {
+                font-size: 15px;
+                b {
+                    font-size: 14px;
+                }
+            }
+
+            .introduce-footer {
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    flex: 1;
+                    line-height: 1.3;
+                }
+
+                div {
+                    width: 1px;
+                    background-color: #435e72;
+                    margin: 0 20px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .introduce-footer {
+        flex-direction: column;
+    }
+}

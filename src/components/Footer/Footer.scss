@@ -12,7 +12,6 @@
         }
         .footer-description {
             line-height: 32px;
-            color: #6c6f72;
         }
         .footer-map {
             width: 100%;
@@ -20,12 +19,27 @@
         }
 
         .footer-logo-link {
-            display: inline-block;
-            margin-bottom: 48px;
+            display: block;
         }
         .footer-logo {
-            max-height: 60px;
+            height: 126px;
         }
+         h2 {
+            padding: 4px 0 16px 0;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                display: block;
+                content: "";
+                width: 30%;
+                height: 1px;
+                background-color: #e0cabf;
+            }
+         }
+
     }
 
     .footer-copyright {
@@ -63,6 +77,9 @@
     .footer-container {
         flex-direction: column;
 
+        .footer-logo-link {
+            text-align: center;
+        }
         .footer-map {
             height: 300px;
         }

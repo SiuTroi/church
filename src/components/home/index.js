@@ -33,7 +33,8 @@ function Home() {
       }))
       data.map((dataItem) => {
         switch (removeVietnameseAccents(dataItem.category)) {
-          case "loi-chua-noi-lam-viec":
+          case "duong-linh":
+            /* Dùng tạm thời cho danh mục "Dưỡng linh" */
               setCategories(prevState => ({
                   ...prevState,
                   godWordWork: dataItem.category
@@ -45,7 +46,7 @@ function Home() {
                   witNess: dataItem.category
                 }))
               break;
-          case "ban-tin":
+          case "thong-bao":
               setCategories(prevState => ({
                   ...prevState,
                   notifyAndNews: dataItem.category
@@ -77,17 +78,18 @@ function Home() {
       <meta property="og:image" content={homeSite.logo} />
       <meta property="og:type" content="article" />
     </Helmet>
-    {categories.godWordWork || categories.witNess || categories.witNess ? <>
-    <Suspense fallback={<Loading />}>
-      <Banner />
-      <TinlanhConcept />
-      <GodWordWork category={categories.godWordWork} />
-      <Witness category={categories.witNess} />
-      <NewVideo />
-      <Sac categories={categories.all} />
-      <NotifyAndNews category={categories.notifyAndNews} />
-    </Suspense>
-    </> : <></>}
+    {
+      <Suspense fallback={<Loading />}>
+        <Banner />
+        {categories.notifyAndNews ? <NotifyAndNews category={categories.notifyAndNews} /> : <></>}
+        <TinlanhConcept />
+        {/* Dùng tạm thời cho danh mục "Dưỡng linh" */}
+        {categories.godWordWork ? <GodWordWork category={categories.godWordWork} /> : <></>} 
+        {categories.witNess ? <Witness category={categories.witNess} /> : <></>}
+        {/* <NewVideo /> */}
+        {/* {categories.all.length > 0 ? <Sac categories={categories.all} /> : <></> } */}
+      </Suspense>
+    }
     </>
   );
 }
